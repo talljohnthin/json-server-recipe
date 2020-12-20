@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 
-function App() {
+import AppLayout from "./appLayout";
+import Home from "./view/home";
+import Details from "./view/recipes/details"
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter basename={"/"}>
+        <Switch>
+          <Fragment>
+            <AppLayout>
+              <Route exact path={`/`} component={Home} />
+              <Route exact path={`/:id`} component={Details} />
+              <Redirect to="/" />
+            </AppLayout>
+          </Fragment>
+        </Switch>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
